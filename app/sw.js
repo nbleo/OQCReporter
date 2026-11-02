@@ -1,11 +1,12 @@
 /* OQCReporter service worker —— 离线优先的 app shell
    改了 app/ 里的文件要同步改这里的 CACHE 版本号，手机才会拿到新版 */
-const CACHE = "oqc-reporter-v3";
+const CACHE = "oqc-reporter-v4";
 const SHELL = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
   "./sync.js",
+  "./pdf.js",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
   "./icons/apple-touch-icon.png"

@@ -1,4 +1,4 @@
-name: Deploy OQCRporter to GitHub Pages
+name: Deploy OQCReporter to GitHub Pages
 
 on:
   push:

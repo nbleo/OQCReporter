@@ -1,6 +1,6 @@
-/* OQCRporter service worker —— 离线优先的 app shell
+/* OQCReporter service worker —— 离线优先的 app shell
    改了 app/ 里的文件要同步改这里的 CACHE 版本号，手机才会拿到新版 */
-const CACHE = "oqc-reporter-v1";
+const CACHE = "oqc-reporter-v2";
 const SHELL = [
   "./",
   "./index.html",

@@ -1,4 +1,4 @@
-/* OQCRporter 云备份 —— 私有仓库同步
+/* OQCReporter 云备份 —— 私有仓库同步
    ---------------------------------------------------------------
    架构（与 FairRecorder 一致）：
      · 公开仓库/pages 只放程序，不存任何业务数据；
@@ -25,7 +25,7 @@
   var NET_TIMEOUT = 30000;
 
   /* 程序本体所在的公开仓库：禁止把数据写进去 */
-  var PUBLIC_CODE_REPOS = [{ owner: "nbleo", repo: "OQCRporter" }];
+  var PUBLIC_CODE_REPOS = [{ owner: "nbleo", repo: "OQCReporter" }, { owner: "nbleo", repo: "OQCRporter" }];
 
   var DEFAULTS = {
     owner: "", repo: "", branch: "main", root: "users",

@@ -18,17 +18,20 @@
 ## 架构：公开程序仓 + 私有数据仓
 
 ```
-nbleo/OQCRporter   (public)   ← 只放程序，GitHub Pages 部署
-  └─ app/                      index.html / sync.js / sw.js / manifest / icons
+nbleo/OQCRporter          (public)   ← 只放程序，GitHub Pages 部署
+  └─ app/                            index.html / sync.js / sw.js / manifest / icons
 
-<你>/<你的私有仓库>  (private)  ← 只放数据，别人看不到
+nbleo/OQCReporter_Data    (private)  ← 只放数据，别人看不到（已建好，空仓库）
   └─ users/<你的登录名>/oqc/
-       ├─ manifest.json                索引：记录清单、照片清单、删除墓碑
-       ├─ records/<记录id>.json         单张检验单
-       └─ photos/<记录id>/<照片id>.jpg   照片原图
+       ├─ manifest.json              索引：记录清单、照片清单、删除墓碑
+       ├─ records/<记录id>.json       单张检验单
+       └─ photos/<记录id>/<照片id>.jpg 照片原图
 ```
 
-每个用户在 App 里绑定**自己的**私有仓库和**自己的** GitHub 令牌，互不影响；公开仓里从来没有任何业务数据。
+> 名字容易看混：**程序仓 `OQCRporter`**（少一个 e）、**数据仓 `OQCReporter_Data`**。
+> 每个使用者也可以用自己的私有仓库，在 App 里改 owner / repo 即可，互不影响。
+
+每个用户在 App 里绑定**自己的**私有仓库和**自己的** GitHub 令牌；公开仓里从来没有任何业务数据。
 
 同步细节（与 [FairRecorder](https://github.com/nbleo/fair_recorder) 同一套做法）：
 
@@ -43,9 +46,9 @@ nbleo/OQCRporter   (public)   ← 只放程序，GitHub Pages 部署
 
 ## 用起来（3 步）
 
-1. **建私有仓库**：GitHub → New repository → 名字随意（如 `oqc-data`）→ 选 **Private** → 勾 Add README
+1. **私有仓库**：已经建好 `nbleo/OQCReporter_Data`（Private）；想自己再建一个也可以 → New repository → 选 **Private** → 勾 Add README
 2. **建令牌**：Settings → Developer settings → Personal access tokens → Fine-grained tokens → 只勾这一个仓库的 **Contents: Read and write**
-3. **绑定**：手机打开 <https://nbleo.github.io/OQCRporter/> → 右上角 ☁ → 填 owner / 仓库名 / 令牌 → 保存配置 → 测试连接 → 双向同步
+3. **绑定**：手机打开 <https://nbleo.github.io/OQCRporter/> → 右上角 ☁ → owner 填 `nbleo`、仓库填 `OQCReporter_Data`、粘贴令牌 → 保存配置 → 测试连接 → 双向同步
 
 详见 [部署说明.md](部署说明.md)（含手机装到主屏、多设备共用、忘记口令等）。
 

@@ -530,7 +530,7 @@
   /* ---------------- UI ---------------- */
   var FIELD = [
     ["owner", "仓库 owner（账号名）", "nbleo"],
-    ["repo", "私有数据仓库名", "oqc-data"],
+    ["repo", "私有数据仓库名", "OQCReporter_Data"],
     ["branch", "分支", "main"],
     ["namespace", "命名空间（可留空，默认用登录名）", ""]
   ];

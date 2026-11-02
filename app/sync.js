@@ -160,15 +160,21 @@
     return who();
   }
 
-  async function checkRepo() {
-    if (!S.token) throw new Error("还没有填 GitHub 令牌");
-    if (!S.owner || !S.repo) throw new Error("还没有填数据仓库 owner / repo");
+  /* 纯本地判断，不联网：避免令牌无效时先报 401、掩盖了“这是程序仓”这个真问题 */
+  function assertNotCodeRepo() {
+    if (!S.owner || !S.repo) return;
     for (var i = 0; i < PUBLIC_CODE_REPOS.length; i++) {
       var p = PUBLIC_CODE_REPOS[i];
       if (p.owner.toLowerCase() === S.owner.toLowerCase() && p.repo.toLowerCase() === S.repo.toLowerCase()) {
         throw new Error("这是公开的程序仓库，不能存检验数据；请绑定一个私有仓库");
       }
     }
+  }
+
+  async function checkRepo() {
+    if (!S.token) throw new Error("还没有填 GitHub 令牌");
+    if (!S.owner || !S.repo) throw new Error("还没有填数据仓库 owner / repo");
+    assertNotCodeRepo();
     var info = await api("GET", "/repos/" + S.owner + "/" + S.repo);
     if (!info || info.private !== true) {
       throw new Error("这个仓库是公开的：检验数据和照片会被人看到，请改用私有仓库");
@@ -314,6 +320,7 @@
   /* ---------------- 上传 ---------------- */
   async function push(opts) {
     opts = opts || {};
+    assertNotCodeRepo();
     await ensureIdentity();
     await checkRepo();
 
@@ -435,6 +442,7 @@
   /* ---------------- 恢复 ---------------- */
   async function pull(opts) {
     opts = opts || {};
+    assertNotCodeRepo();
     await ensureIdentity();
     await checkRepo();
 
@@ -500,6 +508,7 @@
   }
 
   async function syncNow() {
+    assertNotCodeRepo();
     var out = {};
     try { out.pull = await pull(); } catch (e) { out.pullErr = shortErr(e.message); }
     out.push = await push();
@@ -518,6 +527,7 @@
 
   /* ---------------- 测试连接 ---------------- */
   async function test() {
+    assertNotCodeRepo();
     var me = await api("GET", "/user");
     S.login = me.login; saveCfg();
     var info = await checkRepo();
